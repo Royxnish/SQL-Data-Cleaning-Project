@@ -2,15 +2,22 @@
 
 ## Overview
 
-Data cleaning is a crucial step in the data analysis process, ensuring that raw data is transformed into a structured and usable format. This project demonstrates SQL techniques used to clean and preprocess a layoffs dataset by handling missing values, duplicates, formatting inconsistencies, and data quality issues.
+This project focuses on cleaning and analyzing a real-world layoffs dataset using MySQL. The objective was to improve data quality through preprocessing techniques and perform exploratory data analysis (EDA) to identify meaningful trends across companies, industries, countries, and time periods.
+
+The project demonstrates practical SQL skills including data cleaning, data transformation, aggregation, window functions, Common Table Expressions (CTEs), and trend analysis.
+
+---
 
 ## Objectives
 
-* Identify and handle missing data
 * Remove duplicate records
-* Standardize inconsistent data formats
-* Correct erroneous values
-* Prepare the dataset for analysis
+* Handle missing and inconsistent values
+* Standardize text and date formats
+* Improve overall data quality
+* Perform exploratory data analysis on the cleaned dataset
+* Generate business insights from layoffs data
+
+---
 
 ## Technologies Used
 
@@ -19,52 +26,112 @@ Data cleaning is a crucial step in the data analysis process, ensuring that raw 
 * MySQL Workbench
 * Git & GitHub
 
+---
+
 ## Dataset
 
-The dataset contains records of company layoffs across various industries and countries.
+The dataset contains records of company layoffs across multiple industries and countries.
 
-Key attributes include:
+### Key Attributes
 
 * Company
 * Industry
+* Location
 * Country
 * Total Laid Off
 * Percentage Laid Off
 * Date
 * Stage
-* Funds Raised
+* Funds Raised (Millions)
 
-## SQL Techniques Used
+---
 
-* Removing duplicate records
-* Handling NULL values
-* Standardizing text fields
-* Date formatting and conversion
-* Data validation and cleaning
-* Common Table Expressions (CTEs)
+## Data Cleaning Process
+
+The following data cleaning operations were performed:
+
+* Removed duplicate records using window functions
+* Standardized company and industry names
+* Trimmed unnecessary whitespace
+* Converted date values into a consistent format
+* Handled NULL and missing values
+* Validated and corrected inconsistent records
+
+---
+
+## Exploratory Data Analysis
+
+The cleaned dataset was analyzed to identify patterns and trends.
+
+### Analysis Performed
+
+* Companies with the highest layoffs
+* Countries with the highest layoffs
+* Industry-wise layoffs
+* Stage-wise layoffs
+* Year-wise layoffs
+* Monthly layoffs trends
+* Companies with complete workforce reductions (100% layoffs)
+* Rolling cumulative layoffs over time
+
+### SQL Concepts Applied
+
+* Aggregate Functions
+* GROUP BY
+* ORDER BY
 * Window Functions
-* Exploratory Data Analysis (EDA)
+* DENSE_RANK()
+* Common Table Expressions (CTEs)
+* Date Functions
+* String Functions
+
+---
+
+## Project Workflow
+
+1. Imported the raw layoffs dataset into MySQL.
+2. Created staging tables for cleaning operations.
+3. Removed duplicate records.
+4. Standardized text and date formats.
+5. Handled missing and inconsistent values.
+6. Performed exploratory data analysis.
+7. Generated business insights from the cleaned dataset.
+
+---
+
+## Key Findings
+
+* Several technology companies recorded significant workforce reductions.
+* Layoffs were concentrated during specific periods across multiple industries.
+* Certain countries experienced substantially higher layoffs than others.
+* Multiple startups reported complete workforce reductions despite having raised significant funding.
+* Layoff activity varied considerably across funding stages and industries.
+
+---
 
 ## How to Run
 
-1. Import the layoffs dataset into MySQL.
+1. Import the dataset into MySQL.
 2. Execute the data cleaning SQL script.
-3. Run the EDA queries on the cleaned dataset.
-4. Review the results using SELECT statements.
+3. Run the exploratory data analysis queries.
+4. Review the outputs and insights generated from the cleaned dataset.
 
-## Key Insights
-
-* Identified industries with the highest layoffs.
-* Analyzed layoff trends over time.
-* Compared layoffs across countries.
-* Examined company-wise workforce reductions.
-
-## Expected Outcome
-
-The cleaned dataset becomes more consistent, accurate, and suitable for exploratory analysis and reporting.
+---
 
 ## Future Enhancements
 
-* Automating data cleaning using stored procedures.
-* Building dashboards using Power BI or Tableau.
-* Integrating SQL workflows with Python for advanced analysis.
+* Build interactive dashboards using Power BI or Tableau.
+* Automate data cleaning workflows using stored procedures.
+* Integrate Python for advanced analytics and visualization.
+* Perform predictive analysis on layoff trends.
+
+---
+
+## Repository Structure
+
+```text
+layoffs.csv
+Portfolio Project - Data Cleaning.sql
+Portfolio Project - EDA.sql
+README.md
+```
