@@ -1,10 +1,5 @@
--- EDA
-
--- Here we are jsut going to explore the data and find trends or patterns or anything interesting like outliers
-
--- normally when you start the EDA process you have some idea of what you're looking for
-
--- with this info we are just going to look around and see what we find!
+-- Exploratory Data Analysis (EDA)
+-- Objective: Analyze layoffs data to identify trends, patterns, and business insights.
 
 SELECT * 
 FROM world_layoffs.layoffs_staging2;
@@ -19,31 +14,22 @@ FROM world_layoffs.layoffs_staging2;
 
 
 
--- Looking at Percentage to see how big these layoffs were
+-- Analyze percentage of workforce laid off
 SELECT MAX(percentage_laid_off),  MIN(percentage_laid_off)
 FROM world_layoffs.layoffs_staging2
 WHERE  percentage_laid_off IS NOT NULL;
 
--- Which companies had 1 which is basically 100 percent of they company laid off
+-- Companies with complete workforce reduction (100% layoffs)
 SELECT *
 FROM world_layoffs.layoffs_staging2
 WHERE  percentage_laid_off = 1;
--- these are mostly startups it looks like who all went out of business during this time
+-- Reviewing companies with complete workforce reductions
 
--- if we order by funcs_raised_millions we can see how big some of these companies were
+-- Analyzing funding levels among companies with 100% layoffs
 SELECT *
 FROM world_layoffs.layoffs_staging2
 WHERE  percentage_laid_off = 1
 ORDER BY funds_raised_millions DESC;
--- BritishVolt looks like an EV company, Quibi! I recognize that company - wow raised like 2 billion dollars and went under - ouch
-
-
-
-
-
-
-
-
 
 
 
@@ -54,8 +40,7 @@ ORDER BY funds_raised_millions DESC;
 
 -- SOMEWHAT TOUGHER AND MOSTLY USING GROUP BY--------------------------------------------------------------------------------------------------
 
--- Companies with the biggest single Layoff
-
+-- Top companies by single-day layoffs
 SELECT company, total_laid_off
 FROM world_layoffs.layoffs_staging
 ORDER BY 2 DESC
@@ -78,8 +63,7 @@ GROUP BY location
 ORDER BY 2 DESC
 LIMIT 10;
 
--- this it total in the past 3 years or in the dataset
-
+-- Total layoffs aggregated across the dataset period
 SELECT country, SUM(total_laid_off)
 FROM world_layoffs.layoffs_staging2
 GROUP BY country
@@ -109,9 +93,7 @@ ORDER BY 2 DESC;
 
 -- TOUGHER QUERIES------------------------------------------------------------------------------------------------------------------------------------
 
--- Earlier we looked at Companies with the most Layoffs. Now let's look at that per year. It's a little more difficult.
--- I want to look at 
-
+-- Top companies by layoffs for each year using DENSE_RANK()
 WITH Company_Year AS 
 (
   SELECT company, YEAR(date) AS years, SUM(total_laid_off) AS total_laid_off
@@ -137,7 +119,7 @@ FROM layoffs_staging2
 GROUP BY dates
 ORDER BY dates ASC;
 
--- now use it in a CTE so we can query off of it
+-- Using a CTE to calculate cumulative layoffs over time
 WITH DATE_CTE AS 
 (
 SELECT SUBSTRING(date,1,7) as dates, SUM(total_laid_off) AS total_laid_off
@@ -149,6 +131,33 @@ SELECT dates, SUM(total_laid_off) OVER (ORDER BY dates ASC) as rolling_total_lay
 FROM DATE_CTE
 ORDER BY dates ASC;
 
+-- Top 10 Industries by Total Layoffs
+SELECT
+    industry,
+    SUM(total_laid_off) AS total_layoffs
+FROM layoffs_staging2
+GROUP BY industry
+ORDER BY total_layoffs DESC
+LIMIT 10;
+
+
+-- Top 10 Countries by Total Layoffs
+SELECT
+    country,
+    SUM(total_laid_off) AS total_layoffs
+FROM layoffs_staging2
+GROUP BY country
+ORDER BY total_layoffs DESC
+LIMIT 10;
+
+
+-- Monthly Layoff Trend
+SELECT
+    DATE_FORMAT(date, '%Y-%m') AS month,
+    SUM(total_laid_off) AS layoffs
+FROM layoffs_staging2
+GROUP BY month
+ORDER BY month;
 
 
 
