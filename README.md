@@ -1,75 +1,70 @@
-# Project---Data-Cleaning-using-SQL
-# Data Cleaning using SQL
+# Layoffs Data Cleaning and Exploratory Data Analysis using SQL
 
 ## Overview
-Data cleaning is a crucial step in the data analysis process, ensuring that raw data is transformed into a structured and usable format. This project demonstrates various SQL techniques to clean and preprocess a dataset, handling missing values, duplicates, incorrect formatting, and inconsistent data.
+
+Data cleaning is a crucial step in the data analysis process, ensuring that raw data is transformed into a structured and usable format. This project demonstrates SQL techniques used to clean and preprocess a layoffs dataset by handling missing values, duplicates, formatting inconsistencies, and data quality issues.
 
 ## Objectives
-- Identify and handle missing data
-- Remove duplicate records
-- Standardize inconsistent data formats
-- Correct erroneous values
-- Optimize data structure for analysis
+
+* Identify and handle missing data
+* Remove duplicate records
+* Standardize inconsistent data formats
+* Correct erroneous values
+* Prepare the dataset for analysis
 
 ## Technologies Used
-- SQL (Structured Query Language)
-- MySQL / PostgreSQL / SQLite (choose one based on your implementation)
-- DBeaver / MySQL Workbench / pgAdmin (optional for visualization)
+
+* SQL
+* MySQL
+* MySQL Workbench
+* Git & GitHub
 
 ## Dataset
-The dataset used in this project consists of [briefly describe dataset, e.g., "customer transaction records from an e-commerce platform"]. It contains fields such as:
-- `id` (Primary Key)
-- `customer_name`
-- `email`
-- `purchase_date`
-- `amount`
-- `phone_number`
-- `address`
+
+The dataset contains records of company layoffs across various industries and countries.
+
+Key attributes include:
+
+* Company
+* Industry
+* Country
+* Total Laid Off
+* Percentage Laid Off
+* Date
+* Stage
+* Funds Raised
 
 ## SQL Techniques Used
-1. **Handling Missing Data**
-   ```sql
-   SELECT * FROM dataset WHERE column_name IS NULL;
-   UPDATE dataset SET column_name = 'Default_Value' WHERE column_name IS NULL;
-   ```
 
-2. **Removing Duplicates**
-   ```sql
-   DELETE FROM dataset WHERE id NOT IN (
-       SELECT MIN(id) FROM dataset GROUP BY email, phone_number
-   );
-   ```
-
-3. **Standardizing Data Formats**
-   ```sql
-   UPDATE dataset SET phone_number = REPLACE(phone_number, '-', '');
-   ```
-
-4. **Correcting Inconsistent Data**
-   ```sql
-   UPDATE dataset SET customer_name = INITCAP(customer_name);
-   ```
-
-5. **Optimizing Data Structure**
-   ```sql
-   ALTER TABLE dataset MODIFY COLUMN amount DECIMAL(10,2);
-   ```
+* Removing duplicate records
+* Handling NULL values
+* Standardizing text fields
+* Date formatting and conversion
+* Data validation and cleaning
+* Common Table Expressions (CTEs)
+* Window Functions
+* Exploratory Data Analysis (EDA)
 
 ## How to Run
-1. Install a database management system (MySQL, PostgreSQL, or SQLite).
-2. Import the dataset using `LOAD DATA INFILE` or `INSERT INTO` commands.
-3. Run the provided SQL queries to clean the data.
-4. Verify the results using `SELECT` statements.
+
+1. Import the layoffs dataset into MySQL.
+2. Execute the data cleaning SQL script.
+3. Run the EDA queries on the cleaned dataset.
+4. Review the results using SELECT statements.
+
+## Key Insights
+
+* Identified industries with the highest layoffs.
+* Analyzed layoff trends over time.
+* Compared layoffs across countries.
+* Examined company-wise workforce reductions.
 
 ## Expected Outcome
-After performing data cleaning, the dataset will be free of missing values, duplicates, and inconsistencies, making it ready for further analysis or visualization.
+
+The cleaned dataset becomes more consistent, accurate, and suitable for exploratory analysis and reporting.
 
 ## Future Enhancements
-- Automating data cleaning using stored procedures.
-- Implementing triggers to prevent data inconsistency.
-- Integrating with Python or Pandas for further processing.
 
-## Author
-[KAMAL JYOT SINGH]   
-[https://in.linkedin.com/in/kamal-jyot-singh-8900b9247]
-
+* Automating data cleaning using stored procedures.
+* Building dashboards using Power BI or Tableau.
+* Integrating SQL workflows with Python for advanced analysis.
